@@ -5,8 +5,6 @@ import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.annotation.PartitionOffset;
 import org.springframework.kafka.annotation.TopicPartition;
@@ -20,8 +18,8 @@ import org.springframework.messaging.handler.annotation.Payload;
 import java.util.HashMap;
 import java.util.Map;
 
-@EnableKafka
-@Configuration
+//@EnableKafka
+//@Configuration
 @Slf4j
 public class KafkaConsumerConfig {
 
@@ -48,8 +46,10 @@ public class KafkaConsumerConfig {
     }
 
     //@KafkaListener(topics = "olivier", groupId = "helloworld2")
-    @KafkaListener(id = "listen2", topicPartitions = @TopicPartition(topic = "olivier", partitionOffsets = @PartitionOffset(partition = "0", initialOffset = "5")))
+    @KafkaListener(id = "listen2",
+            topicPartitions = @TopicPartition(topic = "olivier", partitionOffsets = @PartitionOffset(partition = "0", initialOffset = "5")))
     public void listen2(@Payload String message) {
         log.warn("Received Message in group helloworld2: " + message);
     }
+
 }

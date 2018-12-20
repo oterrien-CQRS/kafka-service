@@ -1,0 +1,12 @@
+spring.application.name: kafkaConsummerTester
+spring.cloud.stream:
+  kafka.streams:
+    binder.configuration:
+      commit.interval.ms: 1000
+      default.key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+      default.value.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+  bindings:
+    inputStreamTest:
+      destination: streamtest
+    outputStreamTest:
+      destination: streamtest
