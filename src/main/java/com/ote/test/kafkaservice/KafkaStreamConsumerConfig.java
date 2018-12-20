@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Configuration;
 public class KafkaStreamConsumerConfig {
 
     @StreamListener
+    @SuppressWarnings("all")
     public void streamtest(@Input("inputStreamTest") KStream<String, String> input) {
         KStream<String, String>[] branch = input.branch((k, v) -> "0".equals(k), (k, v) -> "1".equals(k), (k, v) -> true);
         branch[0].peek((k, v) -> log.warn(" ------> Reading(0)\t: " + v));
