@@ -1,12 +1,31 @@
-spring.application.name: kafkaConsummerTester
-spring.cloud.stream:
-  kafka.streams:
-    binder.configuration:
-      commit.interval.ms: 1000
-      default.key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
-      default.value.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
-  bindings:
-    inputStreamTest:
-      destination: streamtest
-    outputStreamTest:
-      destination: streamtest
+server:
+  port: 8080
+
+logging:
+  level:
+    root: INFO
+    kafka.*: WARN
+    org.springframework.*: INFO
+    org.apache.kafka.*: ERROR
+
+spring:
+  cloud:
+    stream:
+      bindings:
+        output:
+          destination: user
+          contentType: 'application/json'
+        input:
+          destination: user
+          contentType: 'application/json'
+          group: test
+          consumer:
+            durableSubscription: false
+            concurrency: 5
+            instanceIndex: 1
+      kafka:
+        binder:
+          #          brokers: "192.168.99.100:29092"
+          brokers: "192.168.99.100"
+          defaultBrokerPort: 29092
+          defaultZkPort: 32181
