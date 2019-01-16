@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class KafkaProcessor {
 
-    public Sink sink;
+    private final Sink sink;
 
     @Autowired
     public KafkaProcessor(Sink sink) {
